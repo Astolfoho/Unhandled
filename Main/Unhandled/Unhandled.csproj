@@ -59,6 +59,7 @@
     <Compile Include="Helpers\Other\VirtualPath.cs" />
     <Compile Include="HttpModules\UnhandledModule.cs" />
     <Compile Include="HttpModules\UnhundledViewer.cs" />
+    <Compile Include="Models\ListReturnWrapper.cs" />
     <Compile Include="Models\UnhandledCookie.cs" />
     <Compile Include="Models\UnhandledError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

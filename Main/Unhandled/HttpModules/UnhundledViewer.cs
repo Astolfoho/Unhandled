@@ -85,7 +85,7 @@ namespace Unhandled.HttpModules
             IUnhandledCookieRepository rep = RepositoryFactory.Instance.CreateInstance<IUnhandledCookieRepository>();
             string idError = Request.QueryString["idError"];
             List<UnhandledCookie> ucs = rep.GetByErrorId(Guid.Parse(idError));
-            Response.RespondObjectAsJson(ucs);
+            Response.RespondObjectAsJson(new ListReturnWrapper<List<UnhandledCookie>>(ucs));
         }
        
            

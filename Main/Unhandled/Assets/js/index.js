@@ -72,18 +72,39 @@ function CookieListCtrl($http, $routeParams) {
     var that = this;
     that.model = [];
 
-    var datereg = /\/Date\(((-?|\+?)[0-9]*)-.*\)/;
+    
 
     $http.get("unhandled.axd?method=GetCookieList&idError=" + $routeParams.idError)
     .success(function (data) {
-        that.model = data;
-        for (var i = 0; i < data.length ; i++) {
-            
-            var mils = datereg.exec(that.model[i].expires)[1];
-            that.model[i].expires = new Date(+mils).toDateString();
+        that.model = data.d;
+        for (var i = 0; i < data.d.length ; i++) {            
+            that.model[i].expires = parseJsonDate(that.model[i].expires);
         } 
 
     });
     return that;
 }
 
+
+function parseJsonDate(jsonDate) {
+
+    var datereg = /\/Date\(((-?|\+?)[0-9]*)-.*\)/;
+    var mils = datereg.exec(jsonDate)[1];
+
+    var date = new Date(+mils);
+    var dd = date.getDate();
+    var mm = date.getMonth() + 1; //January is 0!
+
+    var yyyy = date.getFullYear().toString();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+    
+    var formatedYear = ('0000' + yyyy).substring(yyyy.length);
+
+    var date = dd + '/' + mm + '/' + formatedYear;
+    return date;
+}

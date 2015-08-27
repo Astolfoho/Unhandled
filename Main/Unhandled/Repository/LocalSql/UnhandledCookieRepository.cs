@@ -11,7 +11,7 @@ namespace Unhandled.Repository.LocalSql
     {
         public Models.UnhandledCookie Create(Models.UnhandledCookie sc)
         {
-            using (var db = DbFactory.CreateConnection("unhandled.UnhandledCookieItemRepository_Create"))
+            using (var db = DbFactory.CreateConnection("unhandled.UnhandledCookieRepository_Create"))
             {
                 db.EnsureParameter(sc);
                 db.ExecuteNonQuery();
