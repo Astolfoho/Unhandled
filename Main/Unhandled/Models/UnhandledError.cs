@@ -25,10 +25,14 @@ namespace Unhandled.Models
             Type = ex.GetType().Name;
             Source = ex.Source;
             
+
             var frame = new StackTrace(ex, true).GetFrame(0);
-            FileName = frame.GetFileName();
-            LineNumber = frame.GetFileLineNumber();
-            SourceCode = ExceptionHelper.GetSourceFileLines(FileName, Encoding.Default, Source, LineNumber);
+            if (frame != null)
+            {
+                FileName = frame.GetFileName();
+                LineNumber = frame.GetFileLineNumber();
+                SourceCode = ExceptionHelper.GetSourceFileLines(FileName, Encoding.Default, Source, LineNumber);
+            }
         }
 
         [DataMember(Name = "id")]

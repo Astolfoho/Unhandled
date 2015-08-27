@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\UnhandledApi.cs" />
     <Compile Include="Base\BaseModule.cs" />
     <Compile Include="Factories\DbFactory\AppDataConnection.cs" />
     <Compile Include="Factories\DbFactory\DbFactory.cs" />

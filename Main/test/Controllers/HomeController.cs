@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Unhandled.Api;
 
 namespace test.Controllers
 {
@@ -11,6 +12,15 @@ namespace test.Controllers
         // GET: Home
         public string Index()
         {
+            try
+            {
+                throw new Exception("aff");
+            }
+            catch (Exception ex)
+            {
+                UnhandledApi.Instance.WriteException(ex);
+            }
+
             throw new Exception("Vamos ver se funciona");
             return "<h1>Vai Planeta</h1>";
         }
