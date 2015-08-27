@@ -1,0 +1,24 @@
+﻿
+
+
+
+<div ng-controller="ErrorDetailsCtrl as details">
+    <h3>{{details.model.message}}</h3>
+    <br />
+    <ul>
+        <li>
+            <a href="#CookieList/{{details.model.id}}">Cookies</a>
+        </li>
+    </ul>
+    <h4><strong>Type:</strong>{{details.model.type}}</h4>
+    <p><strong>Source: </strong>{{details.model.source}}</p>    
+
+    <p><strong>Source Code: </strong></p>
+
+    <pre ng-bind-html="details.model.sourceCode">
+    </pre>
+
+    <p><strong>Stack Trace: </strong></p>
+    <pre ng-bind-html="details.model.stackTrace">
+    </pre>
+</div>
