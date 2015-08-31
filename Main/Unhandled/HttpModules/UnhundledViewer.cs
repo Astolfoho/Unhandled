@@ -64,10 +64,10 @@ namespace Unhandled.HttpModules
         }
 
 
-        public void GetErrors()
+        public void GetMainErrors()
         {
             IUnhandledErrorRepository rep = RepositoryFactory.Instance.CreateInstance<IUnhandledErrorRepository>();
-            List<UnhandledError> errors = rep.GetAll();
+            List<UnhandledError> errors = rep.GetMainErrors();
             Response.RespondObjectAsJson(errors);            
         }
 

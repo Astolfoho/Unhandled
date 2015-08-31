@@ -50,7 +50,7 @@ function ErrorListCtrl($http) {
     var that = this;
     that.items = [];
 
-    $http.get("unhandled.axd?method=GetErrors")
+    $http.get("unhandled.axd?method=GetMainErrors")
     .success(function (data) {
         that.items = data;
     });

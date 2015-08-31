@@ -13,5 +13,7 @@ namespace Unhandled.Repository.Interfaces
         UnhandledError GetById(long id);
 
         List<Models.UnhandledError> GetAll();
+
+        List<Models.UnhandledError> GetMainErrors();
     }
 }

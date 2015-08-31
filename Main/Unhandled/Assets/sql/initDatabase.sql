@@ -10,7 +10,8 @@ CREATE TABLE [unhandled].[UnhandledError]
 	[Source] VARCHAR(255) NULL, 
 	[LineNumber] INT NULL, 
 	[FileName] VARCHAR(255) NULL, 
-	[SourceCode] VARCHAR(2000) NULL
+	[SourceCode] VARCHAR(2000) NULL,
+	[ParentErrorId] BIGINT NULL
 )
 GO
 
@@ -24,7 +25,9 @@ CREATE PROCEDURE [unhandled].[UnhandledErrorRepository_Create]
 	@Source AS VARCHAR(255), 
 	@LineNumber AS INT, 
 	@FileName AS VARCHAR(255), 
-	@SourceCode AS VARCHAR(2000)
+	@SourceCode AS VARCHAR(2000),
+	@ParentErrorId BIGINT,
+	@ChildError AS BIGINT
 )
 AS
 BEGIN
@@ -38,7 +41,8 @@ BEGIN
 		@Source,
 		@LineNumber,
 		@FileName,
-		@SourceCode)
+		@SourceCode,
+		@ParentErrorId)
 
 		SELECT CAST(SCOPE_IDENTITY() AS BIGINT) Id
 END
@@ -49,16 +53,42 @@ AS
 BEGIN
 	
 	SELECT 
-		Id,
-		[Message],
-		StackTrace,
-		[Type],
-		[Source],
-		LineNumber,
-		[FileName],
-		SourceCode
+		PE.Id,
+		PE.[Message],
+		PE.StackTrace,
+		PE.[Type],
+		PE.[Source],
+		PE.LineNumber,
+		PE.[FileName],
+		PE.SourceCode,
+		PE.ParentErrorId,
+		CE.Id AS ChildError
 	FROM
-		[unhandled].[UnhandledError]
+		[unhandled].[UnhandledError] PE
+	LEFT JOIN [unhandled].[UnhandledError] CE ON PE.Id = CE.ParentErrorId
+
+END
+GO
+
+CREATE PROCEDURE [unhandled].[UnhandledErrorRepository_GetMainErrors]
+AS
+BEGIN
+	
+	SELECT 
+		PE.Id,
+		PE.[Message],
+		PE.StackTrace,
+		PE.[Type],
+		PE.[Source],
+		PE.LineNumber,
+		PE.[FileName],
+		PE.SourceCode,
+		PE.ParentErrorId,
+		CE.Id AS ChildError
+	FROM
+		[unhandled].[UnhandledError] PE
+	LEFT JOIN [unhandled].[UnhandledError] CE ON PE.Id = CE.ParentErrorId
+	WHERE PE.ParentErrorId IS NULL
 
 END
 GO
@@ -71,18 +101,21 @@ AS
 BEGIN
 	
 	SELECT 
-		Id,
-		[Message],
-		StackTrace,
-		[Type],
-		[Source],
-		LineNumber,
-		[FileName],
-		SourceCode
+		PE.Id,
+		PE.[Message],
+		PE.StackTrace,
+		PE.[Type],
+		PE.[Source],
+		PE.LineNumber,
+		PE.[FileName],
+		PE.SourceCode,
+		PE.ParentErrorId,
+		CE.Id AS ChildError
 	FROM
-		[unhandled].[UnhandledError]
+		[unhandled].[UnhandledError] PE
+	LEFT JOIN [unhandled].[UnhandledError] CE ON PE.Id = CE.ParentErrorId
 	WHERE
-		Id = @Id
+		PE.Id = @Id
 
 END
 GO

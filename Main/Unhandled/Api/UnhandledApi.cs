@@ -32,6 +32,16 @@ namespace Unhandled.Api
             IUnhandledErrorRepository rep = RepositoryFactory.Instance.CreateInstance<IUnhandledErrorRepository>();
             uh = rep.Create(uh);
 
+            var inner = ex.InnerException;
+
+            while(inner != null)
+            {
+                var uhInner = new UnhandledError(inner);
+                uhInner.ParentErrorId = uh.Id;
+                rep.Create(uhInner);
+                inner = inner.InnerException;
+            }
+
             var currentRequest = HttpContext.Current.Request;
 
             foreach (var cookieKey in currentRequest.Cookies.AllKeys)

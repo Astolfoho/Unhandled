@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using Unhandled.Helpers;
+using Unhandled.Repository.Attributes;
 
 namespace Unhandled.Models
 {
@@ -57,6 +58,17 @@ namespace Unhandled.Models
 
         [DataMember(Name = "sourceCode")]
         public string SourceCode { get; set; }
+
+        [DataMember(Name = "parentErrorId")]
+        public long? ParentErrorId { get; set; }
+
+        [DbIgnore]
+        [DataMember(Name = "innerError")]
+        public UnhandledError InnerError { get; set; }
+
+        [DataMember(Name = "childError")]
+        public long? ChildError { get; set; }
+
     }
 }
     

@@ -20,7 +20,15 @@ namespace test.Controllers
 
         public string Not()
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("tem uma inner aqui",ex);
+            }
+          
         }
 
         public int Divide()

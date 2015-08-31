@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Web.Hosting;
+using Unhandled.Models;
 using Unhandled.Repository.Data;
 using Unhandled.Repository.Interfaces;
 
@@ -45,6 +46,17 @@ namespace Unhandled.Repository.LocalSql
                     return reader.MapList<Models.UnhandledError>();       
                 }
             }            
+        }
+
+        public List<UnhandledError> GetMainErrors()
+        {
+            using (var db = DbFactory.CreateConnection("unhandled.UnhandledErrorRepository_GetMainErrors"))
+            {
+                using (var reader = db.ExecuteReader())
+                {
+                    return reader.MapList<Models.UnhandledError>();
+                }
+            }
         }
     }
 }

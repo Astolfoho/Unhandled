@@ -12,22 +12,26 @@ namespace System
     {
         internal static void MapProperty(IDataReader reader, object instance, PropertyInfo pi)
         {
+            var value = reader[pi.Name];
+
+            if (value == DBNull.Value)
+                return;
 
             if (pi.PropertyType == typeof(string))
             {
-                pi.SetValue(instance, reader[pi.Name].ToString(), null);
+                pi.SetValue(instance, value.ToString(), null);
             }
-            else if (pi.PropertyType == typeof(long))
+            else if (pi.PropertyType == typeof(long) || pi.PropertyType == typeof(long?))
             {
-                pi.SetValue(instance, (long)reader[pi.Name], null);
+                pi.SetValue(instance, (long)value, null);
             }
-            else if (pi.PropertyType == typeof(int))
+            else if (pi.PropertyType == typeof(int) || pi.PropertyType == typeof(int?))
             {
-                pi.SetValue(instance, (int)reader[pi.Name], null);
+                pi.SetValue(instance, (int)value, null);
             }
-            else if (pi.PropertyType == typeof(Guid))
+            else if (pi.PropertyType == typeof(Guid) || pi.PropertyType == typeof(Guid?))
             {
-                pi.SetValue(instance, Guid.Parse(reader[pi.Name].ToString()), null);
+                pi.SetValue(instance, Guid.Parse(value.ToString()), null);
             }
         }
 

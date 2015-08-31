@@ -6,8 +6,12 @@
     <h3>{{details.model.message}}</h3>
     <br />
     <ul>
-        <li>
+        <li ng-show="!details.model.parentErrorId">
             <a href="#CookieList/{{details.model.id}}">Cookies</a>
+            
+        </li>
+        <li ng-show="!!details.model.childError">
+            <a href="#ErrosDetails/{{details.model.childError}}">InnerError</a>
         </li>
     </ul>
     <h4><strong>Type:</strong>{{details.model.type}}</h4>
