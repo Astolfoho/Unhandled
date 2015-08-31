@@ -19,7 +19,6 @@ namespace Unhandled.Models
 
         public UnhandledError(Exception ex)
         {
-            Id = Guid.NewGuid();
             Message = ex.Message;
             StackTrace = ex.StackTrace;
             Type = ex.GetType().Name;
@@ -36,7 +35,7 @@ namespace Unhandled.Models
         }
 
         [DataMember(Name = "id")]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         [DataMember(Name = "message")]
         public string Message { get; set; }

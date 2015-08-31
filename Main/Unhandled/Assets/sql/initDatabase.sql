@@ -3,7 +3,7 @@ CREATE SCHEMA unhandled
 
 CREATE TABLE [unhandled].[UnhandledError]
 (
-	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+	[Id] BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1), 
 	[Message] VARCHAR(200) NULL, 
 	[StackTrace] VARCHAR(2000) NULL, 
 	[Type] VARCHAR(200) NULL, 
@@ -17,7 +17,7 @@ GO
 
 CREATE PROCEDURE [unhandled].[UnhandledErrorRepository_Create]
 (
-	@Id AS UNIQUEIDENTIFIER,  
+	@Id AS BIGINT,  
 	@Message AS VARCHAR(200), 
 	@StackTrace AS VARCHAR(2000), 
 	@Type AS VARCHAR(200), 
@@ -32,14 +32,15 @@ BEGIN
 	INSERT INTO
 		[unhandled].[UnhandledError]
 		VALUES
-		(@Id,
-		@Message,
+		(@Message,
 		@StackTrace,
 		@Type,
 		@Source,
 		@LineNumber,
 		@FileName,
 		@SourceCode)
+
+		SELECT CAST(SCOPE_IDENTITY() AS BIGINT) Id
 END
 GO
 
@@ -64,7 +65,7 @@ GO
 
 CREATE PROCEDURE [unhandled].[UnhandledErrorRepository_GetById]
 (
-	@Id AS UNIQUEIDENTIFIER
+	@Id AS BIGINT
 )
 AS
 BEGIN
@@ -88,8 +89,8 @@ GO
 
 CREATE TABLE [unhandled].[UnhandledCookie]
 (
-	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
-	UnhandledErrorId UNIQUEIDENTIFIER NOT NULL,
+	[Id] BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1), 
+	UnhandledErrorId BIGINT NOT NULL,
 	Name VARCHAR(200) NULL, 
 	[Path] VARCHAR(255) NULL, 
 	Expires DATETIME NULL, 
@@ -101,8 +102,8 @@ GO
 
 CREATE PROCEDURE [unhandled].[UnhandledCookieRepository_Create]
 (
-	@Id AS UNIQUEIDENTIFIER,  
-	@UnhandledErrorId AS UNIQUEIDENTIFIER,
+	@Id AS BIGINT,  
+	@UnhandledErrorId AS BIGINT,
 	@Name AS VARCHAR(200),
 	@Path AS VARCHAR(255),
 	@Expires AS DATETIME,
@@ -116,8 +117,7 @@ BEGIN
 	INSERT INTO
 		[unhandled].[UnhandledCookie]
 		VALUES
-		(@Id,
-	     @UnhandledErrorId,
+		(@UnhandledErrorId,
 		 @Name,
 		 @Path,
 		 @Expires,
@@ -125,12 +125,14 @@ BEGIN
 		 @Secure,
 		 @Value
 		 )
+
+		 SELECT CAST(SCOPE_IDENTITY() AS BIGINT) Id
 END
 GO
 
 CREATE PROCEDURE [unhandled].[UnhandledCookieRepository_GetByErrorId]
 (
-	@ErrorId AS UNIQUEIDENTIFIER
+	@ErrorId AS BIGINT
 )
 AS
 BEGIN

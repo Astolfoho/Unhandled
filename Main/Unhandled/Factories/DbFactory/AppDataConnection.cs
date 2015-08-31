@@ -69,6 +69,10 @@ namespace Unhandled.Repository.Data
                 {
                     par.SqlDbType = SqlDbType.VarChar;
                 }
+                else if (valueType == typeof(long))
+                {
+                    par.SqlDbType = SqlDbType.BigInt;
+                }
                 else if (valueType == typeof(int))
                 {
                     par.SqlDbType = SqlDbType.Int;

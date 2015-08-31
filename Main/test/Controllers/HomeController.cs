@@ -10,19 +10,12 @@ namespace test.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public string Index()
+        public ActionResult Index()
         {
-            try
-            {
-                throw new Exception("aff");
-            }
-            catch (Exception ex)
-            {
-                UnhandledApi.Instance.WriteException(ex);
-            }
 
-            throw new Exception("Vamos ver se funciona");
-            return "<h1>Vai Planeta</h1>";
+            Response.Cookies.Add(new HttpCookie("bla", "vaiPlaneta"));
+
+            return RedirectToAction("Not");
         }
 
         public string Not()

@@ -18,8 +18,6 @@ namespace Unhandled.Models
 
         public UnhandledCookie(System.Web.HttpCookie httpCookie)
         {
-            // TODO: Complete member initialization
-            this.Id = Guid.NewGuid();
             this.Name = httpCookie.Name;
             this.Path = httpCookie.Path;
             this.Expires = httpCookie.Expires;
@@ -30,10 +28,10 @@ namespace Unhandled.Models
         }
 
         [DataMember(Name = "id")]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         [DataMember(Name = "unhandledErrorId")]
-        public Guid UnhandledErrorId { get; set; }
+        public long UnhandledErrorId { get; set; }
 
         [DataMember(Name = "name")]
         public string Name { get; set; }

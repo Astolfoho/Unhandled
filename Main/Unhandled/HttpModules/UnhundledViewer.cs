@@ -74,7 +74,11 @@ namespace Unhandled.HttpModules
         public void GetErrorDetails()
         {
             IUnhandledErrorRepository rep = RepositoryFactory.Instance.CreateInstance<IUnhandledErrorRepository>();
-            string id = Request.QueryString["id"];
+            long id = 0;
+            if (!long.TryParse(Request.QueryString["id"], out id))
+            {
+                throw new ArgumentException();
+            }
             UnhandledError ue = rep.GetById(id);
             Response.RespondObjectAsJson(ue);      
         }
@@ -84,7 +88,13 @@ namespace Unhandled.HttpModules
         {
             IUnhandledCookieRepository rep = RepositoryFactory.Instance.CreateInstance<IUnhandledCookieRepository>();
             string idError = Request.QueryString["idError"];
-            List<UnhandledCookie> ucs = rep.GetByErrorId(Guid.Parse(idError));
+
+            long id = 0;
+            if(!long.TryParse(Request.QueryString["idError"], out id))
+            {
+                throw new ArgumentException();
+            }
+            List<UnhandledCookie> ucs = rep.GetByErrorId(id);
             Response.RespondObjectAsJson(new ListReturnWrapper<List<UnhandledCookie>>(ucs));
         }
        

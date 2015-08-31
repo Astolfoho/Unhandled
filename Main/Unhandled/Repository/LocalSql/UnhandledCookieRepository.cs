@@ -15,11 +15,12 @@ namespace Unhandled.Repository.LocalSql
             {
                 db.EnsureParameter(sc);
                 db.ExecuteNonQuery();
+                sc.Id = db.ExecuteScalar<long>();
             }
             return sc;
         }
 
-        public List<Models.UnhandledCookie> GetByErrorId(Guid guid)
+        public List<Models.UnhandledCookie> GetByErrorId(long guid)
         {
             using (var db = DbFactory.CreateConnection("unhandled.UnhandledCookieRepository_GetByErrorId"))
             {

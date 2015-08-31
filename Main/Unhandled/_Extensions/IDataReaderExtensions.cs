@@ -17,6 +17,10 @@ namespace System
             {
                 pi.SetValue(instance, reader[pi.Name].ToString(), null);
             }
+            else if (pi.PropertyType == typeof(long))
+            {
+                pi.SetValue(instance, (long)reader[pi.Name], null);
+            }
             else if (pi.PropertyType == typeof(int))
             {
                 pi.SetValue(instance, (int)reader[pi.Name], null);

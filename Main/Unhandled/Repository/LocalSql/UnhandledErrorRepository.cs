@@ -18,13 +18,13 @@ namespace Unhandled.Repository.LocalSql
             using (var db = DbFactory.CreateConnection("unhandled.UnhandledErrorRepository_Create"))
             {
                 db.EnsureParameter(uh);
-                db.ExecuteNonQuery();
+                uh.Id = db.ExecuteScalar<long>();
             }
             return uh;
         }
 
 
-        public Models.UnhandledError GetById(string id)
+        public Models.UnhandledError GetById(long id)
         {
             using (var db = DbFactory.CreateConnection("unhandled.UnhandledErrorRepository_GetById"))
             {

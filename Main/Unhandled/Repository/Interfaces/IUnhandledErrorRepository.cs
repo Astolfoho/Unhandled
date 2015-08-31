@@ -10,7 +10,7 @@ namespace Unhandled.Repository.Interfaces
     {
         UnhandledError Create(UnhandledError uh);
 
-        UnhandledError GetById(string id);
+        UnhandledError GetById(long id);
 
         List<Models.UnhandledError> GetAll();
     }

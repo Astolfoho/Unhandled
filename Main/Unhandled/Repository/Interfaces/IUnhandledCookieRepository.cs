@@ -9,6 +9,6 @@ namespace Unhandled.Repository.Interfaces
     {
         Models.UnhandledCookie Create(Models.UnhandledCookie sc);
 
-        List<Models.UnhandledCookie> GetByErrorId(Guid guid);
+        List<Models.UnhandledCookie> GetByErrorId(long id);
     }
 }
