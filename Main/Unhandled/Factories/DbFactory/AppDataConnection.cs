@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -25,6 +26,19 @@ namespace Unhandled.Repository.Data
             {
                 _conn = LocalDBHelper.GetLocalDB(LocalDBHelper.DB_DEFAULT_NAME, false);
             }
+            InitCommand(spName);
+        }
+
+        public AppDataConnection(string spName, string connectionStringName)
+        {
+            var cs = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+            _conn = new SqlConnection(cs);
+            _conn.Open();
+            InitCommand(spName);
+        }
+
+        private void InitCommand(string spName)
+        {
             _command = _conn.CreateCommand();
             _command.CommandText = spName;
             _command.CommandType = CommandType.StoredProcedure;

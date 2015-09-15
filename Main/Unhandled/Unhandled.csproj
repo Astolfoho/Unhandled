@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Api\UnhandledApi.cs" />
     <Compile Include="Base\BaseModule.cs" />
+    <Compile Include="Configuration\UnhandledConfiguration.cs" />
     <Compile Include="Factories\DbFactory\AppDataConnection.cs" />
     <Compile Include="Factories\DbFactory\DbFactory.cs" />
     <Compile Include="Factories\DbFactory\IUnandledDatabase.cs" />
@@ -67,6 +68,8 @@
     <Compile Include="Repository\Attributes\DbIgnore.cs" />
     <Compile Include="Repository\Interfaces\IUnhandledCookieRepository.cs" />
     <Compile Include="Repository\Interfaces\IUnhandledErrorRepository.cs" />
+    <Compile Include="Repository\SqlServer\UnhandledCookieRepository.cs" />
+    <Compile Include="Repository\SqlServer\UnhandledErrorRepository.cs" />
     <Compile Include="Repository\LocalSql\UnhandledCookieRepository.cs" />
     <Compile Include="Repository\LocalSql\UnhandledErrorRepository.cs" />
     <Compile Include="_Extensions\HttpResponseExtensions.cs" />
