@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Unhandled.Factories.Repository.Attributes;
+using Unhandled.Configuration;
 
 namespace Unhandled.Factories.Repository
 {
@@ -22,8 +22,6 @@ namespace Unhandled.Factories.Repository
         #endregion
 
 
-        private DataAccessMode _accessMode = DataAccessMode.SqlServer;
-
         private const string NAMESPACE_FORMAT = "Unhandled.Repository.{0}";
         private string _currentNamespace;
 
@@ -40,10 +38,7 @@ namespace Unhandled.Factories.Repository
         {
             if (string.IsNullOrWhiteSpace(_currentNamespace))
             {
-                var type = _accessMode.GetType();
-                var memInfo = type.GetMember(_accessMode.ToString());
-                var attributes = memInfo[0].GetCustomAttributes(typeof(ImplementationNameAttribute), false);
-                var impleName = ((ImplementationNameAttribute)attributes[0]).ImplementationName;
+                var impleName = Enum.GetName(typeof(ConnectionMode), UnhandledConfiguration.Current.ConnectionMode);
                 _currentNamespace = string.Format(NAMESPACE_FORMAT, impleName);
             }
             return _currentNamespace;

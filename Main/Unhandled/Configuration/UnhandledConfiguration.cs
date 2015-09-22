@@ -47,12 +47,24 @@ namespace Unhandled.Configuration
             }
         }
 
-        public string ApiUrl { get; internal set; }
+        [ConfigurationProperty("apiUrl")]
+        public string ApiUrl
+        {
+            get
+            {
+                return (string)this["apiUrl"];
+            }
+            set
+            {
+                this["apiUrl"] = value;
+            }
+        }
     }
 
     public enum ConnectionMode
     {
         LocalSql = 0,
-        SqlServer = 1
+        SqlServer = 1,
+        UnhandledApi = 2
     }
 }

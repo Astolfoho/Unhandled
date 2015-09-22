@@ -54,8 +54,6 @@
     <Compile Include="Factories\DbFactory\AppDataConnection.cs" />
     <Compile Include="Factories\DbFactory\DbFactory.cs" />
     <Compile Include="Factories\DbFactory\IUnandledDatabase.cs" />
-    <Compile Include="Factories\Repository\Attributes\ImplementationNameAttribute.cs" />
-    <Compile Include="Factories\Repository\DataAccessMode.cs" />
     <Compile Include="Factories\Repository\RepositoryFactory.cs" />
     <Compile Include="Helpers\AssetsHelper.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
