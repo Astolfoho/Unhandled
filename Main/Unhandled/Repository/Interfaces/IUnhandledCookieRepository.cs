@@ -7,8 +7,8 @@ namespace Unhandled.Repository.Interfaces
 {
     public interface IUnhandledCookieRepository
     {
-        Models.UnhandledCookie Create(Models.UnhandledCookie sc);
+        Models.Cookie Create(Models.Cookie sc);
 
-        List<Models.UnhandledCookie> GetByErrorId(long id);
+        List<Models.Cookie> GetByErrorId(long id);
     }
 }

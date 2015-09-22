@@ -11,14 +11,14 @@ namespace Unhandled.Models
 {
     [Serializable]
     [DataContract]
-    public class UnhandledError
+    public class Error
     {
-        public UnhandledError()
+        public Error()
         {
 
         }
 
-        public UnhandledError(Exception ex)
+        public Error(Exception ex)
         {
             Message = ex.Message;
             StackTrace = ex.StackTrace;
@@ -64,11 +64,13 @@ namespace Unhandled.Models
 
         [DbIgnore]
         [DataMember(Name = "innerError")]
-        public UnhandledError InnerError { get; set; }
+        public Error InnerError { get; set; }
 
         [DataMember(Name = "childError")]
         public long? ChildError { get; set; }
 
+        [DataMember(Name = "applicationId")]
+        public long ApplicationId { get; internal set; }
     }
 }
     

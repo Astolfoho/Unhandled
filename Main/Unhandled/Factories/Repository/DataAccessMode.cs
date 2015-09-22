@@ -13,6 +13,15 @@ namespace Unhandled.Factories.Repository
         AppDataBin = 1,
 
         [ImplementationName("LocalSql")]
-        LocalDb = 2
+        LocalDb = 2,
+
+        [ImplementationName("SqlServer")]
+        SqlServer = 3,
+
+        [ImplementationName("UnhandledApi")]
+        UnhandledApi = 4,
+
+
+
     }
 }

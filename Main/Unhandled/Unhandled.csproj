@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Administration.7.0.0.0\lib\net20\Microsoft.Web.Administration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -59,20 +63,29 @@
     <Compile Include="Helpers\Other\SimpleBitVector32.cs" />
     <Compile Include="Helpers\Other\UrlPath.cs" />
     <Compile Include="Helpers\Other\VirtualPath.cs" />
+    <Compile Include="Helpers\ServerHelper.cs" />
     <Compile Include="HttpModules\UnhandledModule.cs" />
     <Compile Include="HttpModules\UnhundledViewer.cs" />
+    <Compile Include="Models\Application.cs" />
     <Compile Include="Models\ListReturnWrapper.cs" />
-    <Compile Include="Models\UnhandledCookie.cs" />
-    <Compile Include="Models\UnhandledError.cs" />
+    <Compile Include="Models\Cookie.cs" />
+    <Compile Include="Models\Error.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Attributes\DbIgnore.cs" />
     <Compile Include="Repository\Interfaces\IUnhandledCookieRepository.cs" />
     <Compile Include="Repository\Interfaces\IUnhandledErrorRepository.cs" />
+    <Compile Include="Repository\SqlServer\UnhandledApplicationRepository.cs" />
     <Compile Include="Repository\SqlServer\UnhandledCookieRepository.cs" />
     <Compile Include="Repository\SqlServer\UnhandledErrorRepository.cs" />
     <Compile Include="Repository\LocalSql\UnhandledCookieRepository.cs" />
     <Compile Include="Repository\LocalSql\UnhandledErrorRepository.cs" />
+    <Compile Include="Repository\UnhandledApi\HttpClient.cs" />
+    <Compile Include="Repository\UnhandledApi\JsonHttpContent.cs" />
+    <Compile Include="Repository\UnhandledApi\UnhandledCookieRepository.cs" />
+    <Compile Include="Repository\UnhandledApi\UnhandledErrorRepository.cs" />
+    <Compile Include="Repository\Interfaces\IUnhandledApplicationRepository.cs" />
     <Compile Include="_Extensions\HttpResponseExtensions.cs" />
+    <Compile Include="_Extensions\HttpResponseMessageExtensions.cs" />
     <Compile Include="_Extensions\IDataReaderExtensions.cs" />
     <Compile Include="_Extensions\ObjectExtensions.cs" />
   </ItemGroup>
@@ -100,6 +113,9 @@
     <EmbeddedResource Include="Assets\ttf\glyphicons-halflings-regular.ttf" />
     <EmbeddedResource Include="Assets\woff2\glyphicons-halflings-regular.woff2" />
     <EmbeddedResource Include="Assets\woff\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,7 +22,7 @@ namespace Unhandled.Factories.Repository
         #endregion
 
 
-        private DataAccessMode _accessMode = DataAccessMode.LocalDb;
+        private DataAccessMode _accessMode = DataAccessMode.SqlServer;
 
         private const string NAMESPACE_FORMAT = "Unhandled.Repository.{0}";
         private string _currentNamespace;

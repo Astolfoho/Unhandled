@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 using Unhandled.Factories.Repository;
 using Unhandled.Models;
+using Unhandled.Repository.Data;
 using Unhandled.Repository.Interfaces;
 
 namespace Unhandled.Api
@@ -13,22 +14,25 @@ namespace Unhandled.Api
     {
         private UnhandledApi()
         {
-
+            var rep = RepositoryFactory.Instance.CreateInstance<IUnhandledApplicationRepository>();
+            CurrentApplication = rep.GetOrCreate();
         }
 
-        private static Lazy<UnhandledApi> _instance = new Lazy<UnhandledApi>(loadInstance);
-        public static UnhandledApi Instance { get { return _instance.Value; } }
+        private static UnhandledApi _instance;
+        public static UnhandledApi Instance { get { return _instance; } }
 
 
-        private static UnhandledApi loadInstance()
+        static UnhandledApi()
         {
-            return new UnhandledApi();
+            _instance = new UnhandledApi();
         }
 
+        public Application CurrentApplication { get; set; }
 
         public void WriteException(Exception ex)
         {
-            var uh = new UnhandledError(ex);
+            var uh = new Error(ex);
+            uh.ApplicationId = this.CurrentApplication.Id;
             IUnhandledErrorRepository rep = RepositoryFactory.Instance.CreateInstance<IUnhandledErrorRepository>();
             uh = rep.Create(uh);
 
@@ -36,7 +40,7 @@ namespace Unhandled.Api
 
             while(inner != null)
             {
-                var uhInner = new UnhandledError(inner);
+                var uhInner = new Error(inner);
                 uhInner.ParentErrorId = uh.Id;
                 rep.Create(uhInner);
                 inner = inner.InnerException;
@@ -46,8 +50,8 @@ namespace Unhandled.Api
 
             foreach (var cookieKey in currentRequest.Cookies.AllKeys)
             {
-                UnhandledCookie sc = new UnhandledCookie(currentRequest.Cookies[cookieKey]);
-                sc.UnhandledErrorId = uh.Id;
+                Cookie sc = new Cookie(currentRequest.Cookies[cookieKey]);
+                sc.ErrorId = uh.Id;
                 IUnhandledCookieRepository crep = RepositoryFactory.Instance.CreateInstance<IUnhandledCookieRepository>();
                 crep.Create(sc);
             }

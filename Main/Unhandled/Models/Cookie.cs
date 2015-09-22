@@ -8,15 +8,15 @@ namespace Unhandled.Models
 {
     [Serializable]
     [DataContract]
-    public class UnhandledCookie
+    public class Cookie
     {
 
-        public UnhandledCookie()
+        public Cookie()
         {
 
         }
 
-        public UnhandledCookie(System.Web.HttpCookie httpCookie)
+        public Cookie(System.Web.HttpCookie httpCookie)
         {
             this.Name = httpCookie.Name;
             this.Path = httpCookie.Path;
@@ -30,8 +30,8 @@ namespace Unhandled.Models
         [DataMember(Name = "id")]
         public long Id { get; set; }
 
-        [DataMember(Name = "unhandledErrorId")]
-        public long UnhandledErrorId { get; set; }
+        [DataMember(Name = "errorId")]
+        public long ErrorId { get; set; }
 
         [DataMember(Name = "name")]
         public string Name { get; set; }

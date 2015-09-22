@@ -14,9 +14,9 @@ namespace Unhandled.Repository.SqlServer
     public class UnhandledErrorRepository : IUnhandledErrorRepository
     {
 
-        public Models.UnhandledError Create(Models.UnhandledError uh)
+        public Models.Error Create(Models.Error uh)
         {
-            using (var db = DbFactory.CreateConnection("unhandled.UnhandledErrorRepository_Create"))
+            using (var db = DbFactory.CreateConnection("unhandled.ErrorRepository_Create"))
             {
                 db.EnsureParameter(uh);
                 uh.Id = db.ExecuteScalar<long>();
@@ -25,36 +25,36 @@ namespace Unhandled.Repository.SqlServer
         }
 
 
-        public Models.UnhandledError GetById(long id)
+        public Models.Error GetById(long id)
         {
-            using (var db = DbFactory.CreateConnection("unhandled.UnhandledErrorRepository_GetById"))
+            using (var db = DbFactory.CreateConnection("unhandled.ErrorRepository_GetById"))
             {
                 db.EnsureParameter("Id", id);
                 using (var reader = db.ExecuteReader())
                 {
-                    return reader.MapObject<Models.UnhandledError>();
+                    return reader.MapObject<Models.Error>();
                 }
             }
         }
 
-        public List<Models.UnhandledError> GetAll()
+        public List<Models.Error> GetAll()
         {
-            using (var db = DbFactory.CreateConnection("unhandled.UnhandledErrorRepository_GetAll"))
+            using (var db = DbFactory.CreateConnection("unhandled.ErrorRepository_GetAll"))
             {
                 using (var reader = db.ExecuteReader())
                 {
-                    return reader.MapList<Models.UnhandledError>();       
+                    return reader.MapList<Models.Error>();       
                 }
             }            
         }
 
-        public List<UnhandledError> GetMainErrors()
+        public List<Error> GetMainErrors()
         {
-            using (var db = DbFactory.CreateConnection("unhandled.UnhandledErrorRepository_GetMainErrors"))
+            using (var db = DbFactory.CreateConnection("unhandled.ErrorRepository_GetMainErrors"))
             {
                 using (var reader = db.ExecuteReader())
                 {
-                    return reader.MapList<Models.UnhandledError>();
+                    return reader.MapList<Models.Error>();
                 }
             }
         }

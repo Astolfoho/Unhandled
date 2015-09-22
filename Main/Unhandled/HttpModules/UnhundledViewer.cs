@@ -67,7 +67,7 @@ namespace Unhandled.HttpModules
         public void GetMainErrors()
         {
             IUnhandledErrorRepository rep = RepositoryFactory.Instance.CreateInstance<IUnhandledErrorRepository>();
-            List<UnhandledError> errors = rep.GetMainErrors();
+            List<Error> errors = rep.GetMainErrors();
             Response.RespondObjectAsJson(errors);            
         }
 
@@ -79,7 +79,7 @@ namespace Unhandled.HttpModules
             {
                 throw new ArgumentException();
             }
-            UnhandledError ue = rep.GetById(id);
+            Error ue = rep.GetById(id);
             Response.RespondObjectAsJson(ue);      
         }
 
@@ -94,8 +94,8 @@ namespace Unhandled.HttpModules
             {
                 throw new ArgumentException();
             }
-            List<UnhandledCookie> ucs = rep.GetByErrorId(id);
-            Response.RespondObjectAsJson(new ListReturnWrapper<List<UnhandledCookie>>(ucs));
+            List<Cookie> ucs = rep.GetByErrorId(id);
+            Response.RespondObjectAsJson(new ListReturnWrapper<List<Cookie>>(ucs));
         }
        
            

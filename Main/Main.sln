@@ -12,6 +12,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\Readme.md = ..\Readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnhandledApi", "UnhandledApi\UnhandledApi.csproj", "{F29EF981-D988-4E28-A673-87CFF70B32DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{75587B7E-DA19-4DC9-8966-27401B9C50BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,8 +30,15 @@ Global
 		{6EDF52D8-C51B-4BAE-9D62-0F3ED516A319}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EDF52D8-C51B-4BAE-9D62-0F3ED516A319}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EDF52D8-C51B-4BAE-9D62-0F3ED516A319}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F29EF981-D988-4E28-A673-87CFF70B32DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29EF981-D988-4E28-A673-87CFF70B32DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29EF981-D988-4E28-A673-87CFF70B32DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29EF981-D988-4E28-A673-87CFF70B32DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F29EF981-D988-4E28-A673-87CFF70B32DE} = {75587B7E-DA19-4DC9-8966-27401B9C50BE}
 	EndGlobalSection
 EndGlobal

@@ -5,13 +5,13 @@ using System.Text;
 using Unhandled.Repository.Data;
 using Unhandled.Repository.Interfaces;
 
-namespace Unhandled.Repository.LocalSql
+namespace Unhandled.Repository.UnhandledApi
 {
     public class UnhandledCookieItemRepository : IUnhandledCookieRepository
     {
-        public Models.UnhandledCookie Create(Models.UnhandledCookie sc)
+        public Models.Cookie Create(Models.Cookie sc)
         {
-            using (var db = DbFactory.CreateConnection("unhandled.UnhandledCookieRepository_Create"))
+            using (var db = DbFactory.CreateConnection("unhandled.CookieRepository_Create"))
             {
                 db.EnsureParameter(sc);
                 db.ExecuteNonQuery();
@@ -20,14 +20,14 @@ namespace Unhandled.Repository.LocalSql
             return sc;
         }
 
-        public List<Models.UnhandledCookie> GetByErrorId(long guid)
+        public List<Models.Cookie> GetByErrorId(long guid)
         {
-            using (var db = DbFactory.CreateConnection("unhandled.UnhandledCookieRepository_GetByErrorId"))
+            using (var db = DbFactory.CreateConnection("unhandled.CookieRepository_GetByErrorId"))
             {
                 db.EnsureParameter("ErrorId", guid);
                 using (var reader = db.ExecuteReader())
                 {
-                    return reader.MapList<Models.UnhandledCookie>();
+                    return reader.MapList<Models.Cookie>();
                 }
             }
         }

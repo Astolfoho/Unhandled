@@ -48,8 +48,11 @@ namespace System
 
         public static T MapObject<T>(this IDataReader reader) where T : class, new()
         {
-            reader.Read();
+            if (!reader.Read())
+                return null;
+
             return MapObject_internal<T>(reader);
+            
         }
 
         public static List<T> MapList<T>(this IDataReader reader) where T : class, new()

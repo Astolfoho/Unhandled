@@ -46,6 +46,8 @@ namespace Unhandled.Configuration
                 this["connectionString"] = value;
             }
         }
+
+        public string ApiUrl { get; internal set; }
     }
 
     public enum ConnectionMode

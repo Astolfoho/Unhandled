@@ -8,12 +8,12 @@ namespace Unhandled.Repository.Interfaces
 {
     public interface IUnhandledErrorRepository
     {
-        UnhandledError Create(UnhandledError uh);
+        Error Create(Error uh);
 
-        UnhandledError GetById(long id);
+        Error GetById(long id);
 
-        List<Models.UnhandledError> GetAll();
+        List<Models.Error> GetAll();
 
-        List<Models.UnhandledError> GetMainErrors();
+        List<Models.Error> GetMainErrors();
     }
 }
