@@ -8,6 +8,7 @@ using System.Web.Routing;
 using System.Web.Optimization;
 using Microsoft.Practices.Unity;
 using UnhandledApi.Repositories.Interfaces;
+using UnhandledApi.Services;
 
 [assembly: OwinStartup(typeof(UnhandledApi.Startup))]
 
@@ -24,14 +25,13 @@ namespace UnhandledApi
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             var container = new UnityContainer();
+            UnityConfig.Configure(container);
 
-            container.RegisterTypes(AllClasses.FromLoadedAssemblies(),
-                                    WithMappings.FromMatchingInterface,
-                                    WithName.Default,
-                                    WithLifetime.ContainerControlled);
+            var resolver = new UnityDependencyResolver(container);
 
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-    
+            DependencyResolver.SetResolver(resolver);
+            GlobalConfiguration.Configuration.DependencyResolver = resolver;
+
         }
     }
 }

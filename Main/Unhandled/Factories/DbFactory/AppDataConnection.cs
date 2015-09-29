@@ -8,7 +8,9 @@ using System.Reflection;
 using System.Text;
 using Unhandled.Helpers;
 using Unhandled.Repository.Attributes;
-namespace Unhandled.Repository.Data
+using Unhandled.Repository.Data;
+
+namespace Unhandled.Repository.contentData
 {
     internal class AppDataConnection : IUnandledDatabase
     {

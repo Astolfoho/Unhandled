@@ -15,11 +15,13 @@ namespace Unhandled.Repository.UnhandledApi
 
             var contentType = response
                                 .Headers
-                                .FirstOrDefault(w => w.Key.ToLower() == "content-type")
-                                .Value
-                                .First();
+                                .FirstOrDefault(w => w.Key.ToLower() == "content-type");
 
-            switch (contentType)
+
+            if (contentType.Value == null || !contentType.Value.Any())
+                return GetObjectFromJson<T>(response); ;
+
+            switch (contentType.Value.FirstOrDefault())
             {
                 case "application/json":
                     return GetObjectFromJson<T>(response);
@@ -37,7 +39,7 @@ namespace Unhandled.Repository.UnhandledApi
             response.Content.ReadAsStreamAsync().ContinueWith(c =>
             {
                 responseData = c.Result;
-            });
+            }).Wait();
 
             return (T)serializer.ReadObject(responseData);               
           

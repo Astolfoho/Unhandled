@@ -12,6 +12,6 @@ namespace Unhandled.Repository.Interfaces
 
         Application GetOrCreate();
 
-        Application GetByMachineNameAndApplicationName(string machineName, string siteName);
+        Application GetByMachineNameAndApplicationName(string machineName, string applicationName);
     }
 }

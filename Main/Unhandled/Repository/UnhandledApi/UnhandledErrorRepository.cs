@@ -18,7 +18,7 @@ namespace Unhandled.Repository.UnhandledApi
 
         public UnhandledErrorRepository()
         {
-            _client = new HttpClient(UnhandledConfiguration.Current.ApiUrl);
+            _client = new HttpClient(UnhandledConfiguration.Current.ApiUrl, "Errors");
         }
 
         public Models.Error Create(Models.Error uh)
@@ -36,9 +36,12 @@ namespace Unhandled.Repository.UnhandledApi
             return _client.Get<List<Models.Error>>();
         }
 
-        public List<Error> GetMainErrors()
+        public List<Error> GetMainErrors()  
         {
-            return _client.Get<List<Models.Error>>();
+            var url = string.Format("{0}/Applications/{1}/Errors", 
+                                    UnhandledConfiguration.Current.ApiUrl.TrimEnd('/'),
+                                    Api.UnhandledApi.Instance.CurrentApplication.Id);
+            return _client.Get<List<Models.Error>>(url);
         }
     }
 }

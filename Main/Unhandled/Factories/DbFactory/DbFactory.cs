@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Unhandled.Configuration;
+using Unhandled.Repository.contentData;
 
 namespace Unhandled.Repository.Data
 {

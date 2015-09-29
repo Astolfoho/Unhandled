@@ -7,30 +7,45 @@ using System.Threading.Tasks;
 
 namespace Unhandled.Repository.UnhandledApi
 {
-    internal class JsonHttpContent<T> : HttpContent
+    internal class JsonHttpContent : HttpContent
     {
-        public JsonHttpContent(T data)
+        public JsonHttpContent(object content)
         {
             this.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-            Data = Data;
+            using (var ms = new MemoryStream())
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(content.GetType());
+                serializer.WriteObject(ms, content);
+                Lenght = ms.Length;
+                ms.Seek(0, SeekOrigin.Begin);
+
+                using(var sr = new StreamReader(ms))
+                {
+                    this.Content = sr.ReadToEnd();
+                }
+
+            }
+
+            
         }
 
-        public T Data { get; set; }
-        public long DataLength { get; set; }
+        public string Content { get; set; }
+        public long Lenght { get; set; }
 
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
-            return new Task(() =>
+            using (var sw = new StreamWriter(stream))
             {
-                DataContractJsonSerializer serializer = new DataContractJsonSerializer(Data.GetType());
-                serializer.WriteObject(stream, Data);
-                DataLength = stream.Length;
-            });   
+                sw.Write(this.Content);
+            }
+            var t = new Task<Object>(() => null);
+
+            return t;
         }
 
         protected override bool TryComputeLength(out long length)
         {
-            length = DataLength;
+            length = Lenght;
             return true;
         }
     }

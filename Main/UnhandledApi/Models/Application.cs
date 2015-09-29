@@ -8,8 +8,12 @@ using UnhandledApi.Base.Models;
 
 namespace UnhandledApi.Models
 {
-    [Table("Cookie", Schema = "unhandled")]
-    public class Cookie : BaseModel
+    [Table("Application", Schema = "unhandled")]
+    public class Application : BaseModel
     {
+
+        public string MachineName { get; set; }
+
+        public string ApplicationName { get; set; }
     }
 }

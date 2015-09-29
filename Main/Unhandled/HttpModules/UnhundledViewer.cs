@@ -56,7 +56,7 @@ namespace Unhandled.HttpModules
                     {
                         var methodName = Request.QueryString["method"];
                         var method = this.GetType().GetMethod(methodName);
-                        method.Invoke(this, null);
+                            method.Invoke(this, null);
                     }
                 }
                 

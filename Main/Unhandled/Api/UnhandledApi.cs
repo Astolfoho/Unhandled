@@ -42,6 +42,7 @@ namespace Unhandled.Api
             {
                 var uhInner = new Error(inner);
                 uhInner.ParentErrorId = uh.Id;
+                uhInner.ApplicationId = this.CurrentApplication.Id;
                 rep.Create(uhInner);
                 inner = inner.InnerException;
             }

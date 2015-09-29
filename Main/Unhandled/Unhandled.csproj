@@ -79,9 +79,11 @@
     <Compile Include="Repository\LocalSql\UnhandledErrorRepository.cs" />
     <Compile Include="Repository\UnhandledApi\HttpClient.cs" />
     <Compile Include="Repository\UnhandledApi\JsonHttpContent.cs" />
+    <Compile Include="Repository\UnhandledApi\UnhadledApplicationRepository.cs" />
     <Compile Include="Repository\UnhandledApi\UnhandledCookieRepository.cs" />
     <Compile Include="Repository\UnhandledApi\UnhandledErrorRepository.cs" />
     <Compile Include="Repository\Interfaces\IUnhandledApplicationRepository.cs" />
+    <Compile Include="_Extensions\WebRequestExtensions.cs" />
     <Compile Include="_Extensions\HttpResponseExtensions.cs" />
     <Compile Include="_Extensions\HttpResponseMessageExtensions.cs" />
     <Compile Include="_Extensions\IDataReaderExtensions.cs" />

@@ -7,11 +7,12 @@ using UnhandledApi.Models;
 
 namespace UnhandledApi.Repositories.Interfaces
 {
-    public interface IErrorsRepository
+    public interface IErrorsRepository : IRepository
     {
         IEnumerable<Error> GetAll();
         Error GetById(long id);
-        Error Add(Error error);
-        Error DeleteById(long id);
+        Error Create(Error error);
+        bool DeleteById(long id);
+        List<Error> GetByApplicationId(long id);
     }
 }

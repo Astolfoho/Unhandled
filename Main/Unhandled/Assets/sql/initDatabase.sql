@@ -57,12 +57,12 @@ CREATE TABLE [unhandled].[Error]
 	[Id] BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	ApplicationId BIGINT NULL,
 	[Message] VARCHAR(200) NULL, 
-	[StackTrace] VARCHAR(2000) NULL, 
+	[StackTrace] VARCHAR(Max) NULL, 
 	[Type] VARCHAR(200) NULL, 
 	[Source] VARCHAR(255) NULL, 
 	[LineNumber] INT NULL, 
 	[FileName] VARCHAR(255) NULL, 
-	[SourceCode] VARCHAR(2000) NULL,
+	[SourceCode] VARCHAR(MAX) NULL,
 	[ParentErrorId] BIGINT NULL
 )
 GO
@@ -73,12 +73,12 @@ CREATE PROCEDURE [unhandled].[ErrorRepository_Create]
 	@Id AS BIGINT,  
 	@ApplicationId AS BIGINT,
 	@Message AS VARCHAR(200), 
-	@StackTrace AS VARCHAR(2000), 
+	@StackTrace AS VARCHAR(MAX), 
 	@Type AS VARCHAR(200), 
 	@Source AS VARCHAR(255), 
 	@LineNumber AS INT, 
 	@FileName AS VARCHAR(255), 
-	@SourceCode AS VARCHAR(2000),
+	@SourceCode AS VARCHAR(MAX),
 	@ParentErrorId BIGINT,
 	@ChildError AS BIGINT
 )

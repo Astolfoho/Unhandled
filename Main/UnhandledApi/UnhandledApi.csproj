@@ -17,7 +17,7 @@
     <AssemblyName>UnhandledApi</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -159,6 +159,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -188,11 +189,21 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Base\ActionResults\NoContentActionResult.cs" />
+    <Compile Include="Base\Attributes\DefaultRouteNameAttribute.cs" />
+    <Compile Include="Base\BaseApiController.cs" />
+    <Compile Include="Base\Models\BaseModel.cs" />
+    <Compile Include="Controllers\Api\ApplicationsController.cs" />
     <Compile Include="Controllers\Api\CookiesController.cs" />
     <Compile Include="Controllers\Api\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\Application.cs" />
+    <Compile Include="Repositories\Interfaces\IApplicationRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRepository.cs" />
-    <Compile Include="UnityDependencyResolver.cs" />
+    <Compile Include="Repositories\SqlServer\ApplicationRepository.cs" />
+    <Compile Include="Repositories\SqlServer\BaseRepository.cs" />
+    <Compile Include="Repositories\SqlServer\ErrorsRepository.cs" />
+    <Compile Include="Services\UnityDependencyResolver.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -280,7 +291,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61810</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:61810/</IISUrl>
+          <IISUrl>http://localhost:8005</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
